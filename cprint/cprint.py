@@ -1,4 +1,5 @@
 from collections import namedtuple
+import sys
 from typing import List, Optional
 
 import click
@@ -37,3 +38,8 @@ def danger_print(text: str) -> None:
 
 def warning_print(text: str) -> None:
     click.secho(text, bg=[245, 132, 66], fg="bright_white")
+
+
+def print_now(*args, **kwargs):
+    print(*args, **kwargs)
+    sys.stdout.flush()
