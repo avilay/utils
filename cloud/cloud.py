@@ -204,7 +204,7 @@ pass_tasks = click.make_pass_decorator(Tasks)
 
 
 @click.group()
-@click.version_option("0.0.2")
+@click.version_option("0.0.1")
 @click.pass_context
 def main(ctx):
     """
