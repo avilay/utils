@@ -1,10 +1,11 @@
-import click
-from typing import Callable
 from collections import defaultdict
-import boto3
-from cprint import danger_print, warning_print, info_print
-from botocore.exceptions import WaiterError
 from pathlib import Path
+from typing import Callable
+
+import boto3
+import click
+from botocore.exceptions import WaiterError
+from cprint import danger_print, info_print, warning_print
 from shell import SSHConfig, SSHConfigEntry
 
 
@@ -203,9 +204,12 @@ pass_tasks = click.make_pass_decorator(Tasks)
 
 
 @click.group()
-@click.version_option("0.1")
+@click.version_option("0.0.2")
 @click.pass_context
 def main(ctx):
+    """
+    Augmentation to available public cloud CLIs when they are missing some functionality.
+    """
     ctx.obj = Tasks()
     ctx.obj["ec2", "start"] = ec2_start
     ctx.obj["ec2", "stop"] = ec2_stop
@@ -221,6 +225,13 @@ def main(ctx):
 @click.argument("task", type=str)
 @pass_tasks
 def ec2(tasks, instance_name: str, task: str) -> None:
+    """
+    \b
+    Tools to manage AWS EC2 instances.
+    Can do the following tasks:
+      * start
+      * stop
+    """
     try:
         tasks["ec2", task](instance_name)
     except KeyboardInterrupt:
