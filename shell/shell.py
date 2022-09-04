@@ -5,8 +5,8 @@ import re
 from typing import Optional, cast, Iterator
 
 
-def _gunzip(src_file: Path, dst_dir: Path) -> None:
-    dst_file = dst_dir / src_file
+def _gunzip(src_file: str, dst_dir: str) -> None:
+    dst_file = Path(dst_dir) / src_file
     with gzip.open(src_file, "rb") as fsrc:
         with open(dst_file, "wb") as fdst:
             shutil.copyfileobj(fsrc, fdst)

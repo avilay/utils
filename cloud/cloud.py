@@ -80,8 +80,11 @@ def ec2_start(instance_name: str) -> None:
     for image in images["Images"]:
         image_id = image["ImageId"]
         image_name = image["Name"]
-        username = username_ami_map.get(image_name, default_username)
-        usernames[image_id] = username
+        # username = username_ami_map.get(image_name, default_username)
+        usernames[image_id] = default_username
+        for username, aminame in username_ami_map.items():
+            if aminame.find(image_name) != -1:
+                usernames[image_id] = username
 
     ssh_config_file_path = Path.home() / ".ssh" / "config"
     ssh_config_file_path.touch(exist_ok=True)
