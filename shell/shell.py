@@ -6,9 +6,11 @@ from typing import Optional, cast, Iterator
 
 
 def _gunzip(src_file: str, dst_dir: str) -> None:
-    dst_file = Path(dst_dir) / src_file
-    with gzip.open(src_file, "rb") as fsrc:
-        with open(dst_file, "wb") as fdst:
+    src_file_path = Path(src_file)
+    dst_dir_path = Path(dst_dir)
+    dst_file_path = dst_dir_path / src_file_path.stem
+    with gzip.open(src_file_path, "rb") as fsrc:
+        with open(dst_file_path, "wb") as fdst:
             shutil.copyfileobj(fsrc, fdst)
 
 
