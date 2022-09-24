@@ -83,7 +83,7 @@ def ec2_start(instance_name: str) -> None:
         # username = username_ami_map.get(image_name, default_username)
         usernames[image_id] = default_username
         for username, aminame in username_ami_map.items():
-            if aminame.find(image_name) != -1:
+            if image_name.find(aminame) != -1:
                 usernames[image_id] = username
 
     ssh_config_file_path = Path.home() / ".ssh" / "config"
@@ -207,7 +207,7 @@ pass_tasks = click.make_pass_decorator(Tasks)
 
 
 @click.group()
-@click.version_option("0.0.1")
+@click.version_option("0.0.2")
 @click.pass_context
 def main(ctx):
     """
